@@ -167,4 +167,68 @@ body {
     background: rgba(255, 255, 255, 0.1);
     padding: 8px 15px;
     border-radius: 20px;
+
+}
+/* Стили для подсказки ставки */
+.bet-hint {
+    font-size: 0.9em;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: help;
+    transition: all 0.3s;
+    min-width: 120px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.bet-hint:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* Анимация для подсказки */
+@keyframes hintPulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 0.8; }
+}
+
+.bet-hint:not(:empty) {
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+/* Стили для разных состояний */
+.bet-hint[data-type="next"] {
+    color: #4CAF50;
+}
+
+.bet-hint[data-type="max"] {
+    color: #FFD700;
+}
+
+.bet-hint[data-type="insufficient"] {
+    color: #e74c3c;
+}
+
+/* Tooltip кастомный */
+.bet-hint[title] {
+    position: relative;
+}
+
+.bet-hint[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    z-index: 100;
+    border: 1px solid #FFD700;
 }
