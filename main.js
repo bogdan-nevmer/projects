@@ -1,10 +1,8 @@
 // Vegas Slot Machine - основной файл
-console.log('🎰 Vegas Slot Machine загружается...');
-
-// Данные игры
+console.log('🎰 Vegas Slot Machine // Данные игры
 const gameState = {
     balance: 1000,
-    currentBet: 1,
+    currentBet: betLevels[0], // теперь 1
     isSpinning: false,
     totalSpins: 0,
     totalWon: 0,
@@ -111,12 +109,51 @@ function setupEventListeners() {
     const betUp = document.getElementById('bet-up');
     const betDown = document.getElementById('bet-down');
     
-    // Кнопка вращения
-    spinBtn.addEventListener('click', () => {
-        if (!gameState.isSpinning && gameState.balance >= gameState.currentBet) {
-            spin();
-        }
-    });
+   // Настройка обработчиков
+function setupEventListeners() {
+    const spinBtn = document.getElementById('spin-btn');
+    const betUp = document.getElementById('bet-up');
+    const betDown = document.getElementById('bet-down');
+    
+    if (spinBtn) {
+        spinBtn.addEventListener('click', function() {
+            if (!gameState.isSpinning && gameState.balance >= gameState.currentBet) {
+                spin();
+            }
+        });
+    }
+    
+    if (betUp) {
+        betUp.addEventListener('click', function() {
+            // Переход к следующей ставке
+            if (currentBetIndex < betLevels.length - 1) {
+                const nextBet = betLevels[currentBetIndex + 1];
+                // Проверяем, хватает ли баланса на следующую ставку
+                if (nextBet <= gameState.balance) {
+                    currentBetIndex++;
+                    gameState.currentBet = betLevels[currentBetIndex];
+                    updateUI();
+                    showBetHint();
+                } else {
+                    // Показываем, что недостаточно средств
+                    showInsufficientFundsHint();
+                }
+            }
+        });
+    }
+    
+    if (betDown) {
+        betDown.addEventListener('click', function() {
+            // Переход к предыдущей ставке
+            if (currentBetIndex > 0) {
+                currentBetIndex--;
+                gameState.currentBet = betLevels[currentBetIndex];
+                updateUI();
+                showBetHint();
+            }
+        });
+    }
+}
     
     // Увеличение ставки
     betUp.addEventListener('click', () => {
@@ -442,3 +479,4 @@ spin = async function() {
 
 
 console.log('🎰 Скрипт загружен. Ожидание загрузки DOM...');
+
