@@ -1,10 +1,8 @@
 // Vegas Slot Machine - основной файл
-console.log('🎰 Vegas Slot Machine загружается...');
-
-// Данные игры
+console.log('🎰 Vegas Slot Machine // Данные игры
 const gameState = {
     balance: 1000,
-    currentBet: 1,
+    currentBet: betLevels[0], // теперь 1
     isSpinning: false,
     totalSpins: 0,
     totalWon: 0,
@@ -442,3 +440,4 @@ spin = async function() {
 
 
 console.log('🎰 Скрипт загружен. Ожидание загрузки DOM...');
+
