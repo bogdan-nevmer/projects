@@ -1,26 +1,16 @@
 // Vegas Slot Machine - основной файл
-console.log('🎰 Vegas Slot Machine // Данные игры
+console.log('🎰 Vegas Slot Machine загружается...');
+
+// Данные игры
 const gameState = {
     balance: 1000,
-    currentBet: betLevels[0], // теперь 1
+    currentBet: 1,
     isSpinning: false,
     totalSpins: 0,
     totalWon: 0,
     totalBetAmount: 0
 };
-// Доступные ставки (прогрессивная шкала)
-const betLevels = [
-    // От 1 до 10 с шагом 1
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-    // От 15 до 50 с шагом 5
-    15, 20, 25, 30, 35, 40, 45, 50,
-    // От 100 до 200 с шагом 50
-    100, 150, 200,
-    // От 300 до 1000 с шагом 100
-    300, 400, 500, 600, 700, 800, 900, 1000
-];
 
-let currentBetIndex = 0; // Индекс текущей ставки (начинаем с 1)
 // Символы для игры
 const symbols = [
     { emoji: '🍒', name: 'Cherry', color: '#e74c3c', weight: 30 },
@@ -109,51 +99,12 @@ function setupEventListeners() {
     const betUp = document.getElementById('bet-up');
     const betDown = document.getElementById('bet-down');
     
-   // Настройка обработчиков
-function setupEventListeners() {
-    const spinBtn = document.getElementById('spin-btn');
-    const betUp = document.getElementById('bet-up');
-    const betDown = document.getElementById('bet-down');
-    
-    if (spinBtn) {
-        spinBtn.addEventListener('click', function() {
-            if (!gameState.isSpinning && gameState.balance >= gameState.currentBet) {
-                spin();
-            }
-        });
-    }
-    
-    if (betUp) {
-        betUp.addEventListener('click', function() {
-            // Переход к следующей ставке
-            if (currentBetIndex < betLevels.length - 1) {
-                const nextBet = betLevels[currentBetIndex + 1];
-                // Проверяем, хватает ли баланса на следующую ставку
-                if (nextBet <= gameState.balance) {
-                    currentBetIndex++;
-                    gameState.currentBet = betLevels[currentBetIndex];
-                    updateUI();
-                    showBetHint();
-                } else {
-                    // Показываем, что недостаточно средств
-                    showInsufficientFundsHint();
-                }
-            }
-        });
-    }
-    
-    if (betDown) {
-        betDown.addEventListener('click', function() {
-            // Переход к предыдущей ставке
-            if (currentBetIndex > 0) {
-                currentBetIndex--;
-                gameState.currentBet = betLevels[currentBetIndex];
-                updateUI();
-                showBetHint();
-            }
-        });
-    }
-}
+    // Кнопка вращения
+    spinBtn.addEventListener('click', () => {
+        if (!gameState.isSpinning && gameState.balance >= gameState.currentBet) {
+            spin();
+        }
+    });
     
     // Увеличение ставки
     betUp.addEventListener('click', () => {
@@ -477,6 +428,6 @@ spin = async function() {
     updateStats();
 };
 
-
+console.log('🎰 Скрипт загружен. Ожидание загрузки DOM...');
 console.log('🎰 Скрипт загружен. Ожидание загрузки DOM...');
 
