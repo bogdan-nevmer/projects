@@ -1,26 +1,16 @@
 // Vegas Slot Machine - основной файл
-console.log('🎰 Vegas Slot Machine // Данные игры
+console.log('🎰 Vegas Slot Machine загружается...');
+
+// Данные игры
 const gameState = {
     balance: 1000,
-    currentBet: betLevels[0], // теперь 1
+    currentBet: 1,
     isSpinning: false,
     totalSpins: 0,
     totalWon: 0,
     totalBetAmount: 0
 };
-// Доступные ставки (прогрессивная шкала)
-const betLevels = [
-    // От 1 до 10 с шагом 1
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-    // От 15 до 50 с шагом 5
-    15, 20, 25, 30, 35, 40, 45, 50,
-    // От 100 до 200 с шагом 50
-    100, 150, 200,
-    // От 300 до 1000 с шагом 100
-    300, 400, 500, 600, 700, 800, 900, 1000
-];
 
-let currentBetIndex = 0; // Индекс текущей ставки (начинаем с 1)
 // Символы для игры
 const symbols = [
     { emoji: '🍒', name: 'Cherry', color: '#e74c3c', weight: 30 },
@@ -438,6 +428,4 @@ spin = async function() {
     updateStats();
 };
 
-
 console.log('🎰 Скрипт загружен. Ожидание загрузки DOM...');
-
